@@ -8,6 +8,7 @@
 #include "Queue.h"
 #include "BinarySearchTree.h"
 #include "BinaryTree.h"
+#include "Heap.h"
 
 using namespace std;
 
@@ -244,6 +245,22 @@ int main()
 //
 //delete(bt);
 
+#pragma endregion
+
+#pragma region Heap - Min Heap(implementation, add, peek, pop, print)
+//MinHeap* minHeap = new MinHeap();
+//minHeap->add(10);
+//minHeap->add(15);
+//minHeap->add(20);
+//minHeap->add(17);
+//minHeap->add(8);
+//
+//minHeap->print();
+//cout << "Peek on Min Heap : " << minHeap->peek() << endl;
+//minHeap->pop();
+//minHeap->print();
+//
+//delete(minHeap);
 #pragma endregion
 
 }
