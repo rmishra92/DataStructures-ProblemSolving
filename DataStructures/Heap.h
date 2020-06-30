@@ -9,6 +9,9 @@ using namespace std;
 // Note : Heap is filled top->bottom and then left->right so array implementation is easier.
 // left child = 2 * index + 1, right child = 2 * index + 1, parent = (index - 2) / 2
 
+// Note :- for storing "k-best" element in a list, min-heap can be useful. Insert the new element and then pop. Pop will pop the worst element in the list
+// leaving the k-best element at this stage....
+
 class MinHeap {
 private:
 	int MAX_SIZE = 10;
