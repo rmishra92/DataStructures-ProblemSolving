@@ -69,6 +69,7 @@ private:
 		return (2 * index + 2);
 	}
 
+	// T(n) = O(log(n))
 	void heapifyUp() {
 		int ptr = index - 1; // index of last insert
 		while (hasParent(ptr) && elements[getParentIndex(ptr)] > elements[ptr]) { // if parent is present and larger than ptr
@@ -77,6 +78,7 @@ private:
 		}
 	}
 
+	// T(n) = O(log(n))
 	void heapifyDown() {
 
 		int ptr = 0;
@@ -109,7 +111,6 @@ public:
 	}
 
 	void pop() {
-		int item = elements[0];
 		elements[0] = elements[index - 1];
 		index--;
 		heapifyDown();
