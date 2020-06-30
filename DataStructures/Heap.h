@@ -15,15 +15,15 @@ using namespace std;
 class MinHeap {
 private:
 	int MAX_SIZE = 10;
-	int index = 0;
+	int arrIndex = 0;
 	int* elements = new int[MAX_SIZE];
 
 	void ensureCapacity() {
-		if (index == MAX_SIZE) {
+		if (arrIndex == MAX_SIZE) {
 			int* temp = elements;
 			elements = new int[MAX_SIZE * 2];
 			MAX_SIZE *= 2;
-			copyArrayElements(temp, elements, index);
+			copyArrayElements(temp, elements, arrIndex);
 			delete(temp);
 		}
 	}
@@ -51,11 +51,11 @@ private:
 	}
 
 	bool hasLeftChild(int index) {
-		return getLeftChildIndex(index) < MAX_SIZE && elements[getLeftChildIndex(index)] != 0;
+		return getLeftChildIndex(index) < arrIndex && elements[getLeftChildIndex(index)] != 0;
 	}
 
 	bool hasRightChild(int index) {
-		return getRightChildIndex(index) < MAX_SIZE && elements[getRightChildIndex(index)] != 0;
+		return getRightChildIndex(index) < arrIndex && elements[getRightChildIndex(index)] != 0;
 	}
 
 	int getParentIndex(int index) {
@@ -74,7 +74,7 @@ private:
 
 	// T(n) = O(log(n))
 	void heapifyUp() {
-		int ptr = index - 1; // index of last insert
+		int ptr = arrIndex - 1; // index of last insert
 		while (hasParent(ptr) && elements[getParentIndex(ptr)] > elements[ptr]) { // if parent is present and larger than ptr
 			swap(elements[getParentIndex(ptr)], elements[ptr]);
 			ptr = getParentIndex(ptr);
@@ -104,8 +104,8 @@ private:
 public:
 	void add(int data) {
 		ensureCapacity(); // increase the size of array to twice if heap is full or else do nothing.
-		elements[index] = data;
-		index++;
+		elements[arrIndex] = data;
+		arrIndex++;
 		heapifyUp();
 	}
 
@@ -114,15 +114,40 @@ public:
 	}
 
 	void pop() {
-		elements[0] = elements[index - 1];
-		index--;
+		elements[0] = elements[arrIndex - 1];
+		arrIndex--;
 		heapifyDown();
 	}
 
 	void print() {
-		for (int i = 0; i < index; i++) {
+		for (int i = 0; i < arrIndex; i++) {
 			cout << elements[i] << " ";
 		}
 		cout << endl;
 	}
+
+	friend int* sortDescending(int* arr, int size);
 };
+
+// Steps : Since in a MinHeap, smallest number is always on top of heap. so, swap it with last element in array
+// reduce index and heapifyDown() rest of the array to get the smallest on top again.
+// Repeat above until index > 1.
+int* sortDescending(int* arr, int size) {
+	MinHeap* minheap = new MinHeap();
+	// create a min heap from the array, T(n) = O(nlog(n))
+	for (int i = 0; i < size; i++) {
+		minheap->add(arr[i]);
+	}
+
+	// T(n) = O(nlog(n))
+	while (minheap->arrIndex > 0) {
+		minheap->swap(minheap->elements[0], minheap->elements[minheap->arrIndex - 1]);
+		minheap->arrIndex--;
+		minheap->heapifyDown();
+	}
+
+	int* retArray = minheap->elements;
+	delete(minheap);
+
+	return retArray;
+}

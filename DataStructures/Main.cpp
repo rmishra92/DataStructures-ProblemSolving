@@ -261,6 +261,24 @@ int main()
 //minHeap->print();
 //
 //delete(minHeap);
+
+// ---------------------- Heap Sort(descending order using min heap) --------------------
+//cout << "Enter size of the array to sort : " << endl;
+//int size = 0;
+//cin >> size;
+//int* arr = new int[size];
+//for (int i = 0; i < size; i++) {
+//	cout << "Enter element : ";
+//	cin >> arr[i];
+//	cout << endl;
+//}
+//
+//int* retArray = sortDescending(arr, size);
+//cout << "Sorted array in descending order : ";
+//for (int i = 0; i < size; i++) {
+//	cout << retArray[i] << " ";
+//}
+//cout << endl;
 #pragma endregion
 
 }
