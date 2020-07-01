@@ -285,23 +285,47 @@ int main()
 #pragma region Hash Table (implementation, insert & search -> open addressing & closed addressing)
 // open addressing based implementation, i.e,
 // on collision, find the next available spot in the array and store the element there....
-HashTable* dict = new HashTable();
-dict->insert("app", "apple");
-dict->insert("ba", "banana");
-dict->insert("ca", "camel");
-dict->insert("t", "toy");
-dict->insert("r", "rat"); // at this point array in hash table is full so next insert will resize it
-dict->insert("z", "zebra");
+//HashTable* dict = new HashTable();
+//dict->insert("app", "apple");
+//dict->insert("ba", "banana");
+//dict->insert("ca", "camel");
+//dict->insert("t", "toy");
+//dict->insert("r", "rat"); // at this point array in hash table is full so next insert will resize it
+//dict->insert("z", "zebra");
+//
+//Object* obj = dict->search("t");
+//cout << "Key : " << obj->key << ", ";
+//cout << "Value : " << obj->value << endl;
+//
+//Object* obj1 = dict->search("abc");
+//if (obj1 != nullptr) {
+//	cout << "Key : " << obj1->key << ", ";
+//	cout << "Value : " << obj1->value << endl;
+//}
+//
+//delete(dict);
 
-Object* obj = dict->search("t");
-cout << "Key : " << obj->key << ", ";
-cout << "Value : " << obj->value << endl;
-
-Object* obj1 = dict->search("abc");
-if (obj1 != nullptr) {
-	cout << "Key : " << obj1->key << ", ";
-	cout << "Value : " << obj1->value << endl;
-}
+// closed addressing, i.e, chaining based implementation, i.e,
+//on collision, store element as next node in the linked list maintained at every index....
+//HashTable* dict1 = new HashTable();
+//dict1->insertChaining("app", "apple");
+//dict1->insertChaining("ba", "banana");
+//dict1->insertChaining("ca", "camel");
+//dict1->insertChaining("t", "toy");
+//dict1->insertChaining("r", "rat"); // at this point array in hash table is full so next insert will resize it
+//dict1->insertChaining("z", "zebra");
+//
+//Object* obj2 = dict1->searchChaining("t");
+//cout << "Key : " << obj2->key << ", ";
+//cout << "Value : " << obj2->value << endl;
+//
+//Object* obj3 = dict1->searchChaining("abc");
+//if (obj3 != nullptr) {
+//	cout << "Key : " << obj3->key << ", ";
+//	cout << "Value : " << obj3->value << endl;
+//}
+//
+//delete(dict1);
 #pragma endregion
 
 

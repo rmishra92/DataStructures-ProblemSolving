@@ -8,10 +8,18 @@ struct Object {
 	string value;
 };
 
+struct HashNode {
+	Object* value;
+	HashNode* next;
+};
+
 class HashTable {
 private:
 	int size = 5;
 	Object** elements;
+
+	// chaining based implementation
+	HashNode** elementArr;
 
 	void ensureCapacity() {
 		// check if array is full
@@ -45,6 +53,8 @@ private:
 public:
 	HashTable() {
 		elements = new Object * [size] {nullptr};
+		// chaining based implementation
+		elementArr = new HashNode * [size] {nullptr};
 	}
 	// ------------- Open addressing based implementation of insert() and search() function -------------------
 	// T(n) = O(1) in best case, O(n) in worst case
@@ -92,5 +102,48 @@ public:
 				return elements[nextIndex];
 			}
 		}
+	}
+
+	// ---------------- closed addressing, i.e, chaining based implementation of insert() and search() --------------------
+	void insertChaining(string key, string value) {
+		int index = hashFunction(key);
+		Object* obj = new Object();
+		obj->key = key;
+		obj->value = value;
+		HashNode* newNode = new HashNode();
+		newNode->value = obj;
+		newNode->next = nullptr;
+		if (elementArr[index] == nullptr) {
+			elementArr[index] = newNode;
+		}
+		else {
+			HashNode* temp = elementArr[index];
+			while (temp->next != nullptr) {
+				temp = temp->next;
+			}
+			temp->next = newNode;
+		}
+	}
+
+	Object* searchChaining(string key) {
+		int index = hashFunction(key);
+		HashNode* head = elementArr[index];
+		if (head == nullptr) {
+			cout << "Key not found." << endl;
+			return nullptr;
+		}
+		else {
+			HashNode* temp = head;
+			
+			while (temp != nullptr) {
+				if (temp->value->key == key) {
+					return temp->value;
+				}
+				temp = temp->next;
+			}
+			cout << "Key not found." << endl;
+			return nullptr; // no element found..
+		}
+		
 	}
 };
