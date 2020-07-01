@@ -9,6 +9,7 @@
 #include "BinarySearchTree.h"
 #include "BinaryTree.h"
 #include "Heap.h"
+#include "HashTable.h"
 
 using namespace std;
 
@@ -280,5 +281,29 @@ int main()
 //}
 //cout << endl;
 #pragma endregion
+
+#pragma region Hash Table (implementation, insert & search -> open addressing & closed addressing)
+// open addressing based implementation, i.e,
+// on collision, find the next available spot in the array and store the element there....
+HashTable* dict = new HashTable();
+dict->insert("app", "apple");
+dict->insert("ba", "banana");
+dict->insert("ca", "camel");
+dict->insert("t", "toy");
+dict->insert("r", "rat"); // at this point array in hash table is full so next insert will resize it
+dict->insert("z", "zebra");
+
+Object* obj = dict->search("t");
+cout << "Key : " << obj->key << ", ";
+cout << "Value : " << obj->value << endl;
+
+Object* obj1 = dict->search("abc");
+if (obj1 != nullptr) {
+	cout << "Key : " << obj1->key << ", ";
+	cout << "Value : " << obj1->value << endl;
+}
+#pragma endregion
+
+
 
 }

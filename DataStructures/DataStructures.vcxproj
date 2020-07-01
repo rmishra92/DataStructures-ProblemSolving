@@ -144,6 +144,7 @@
   <ItemGroup>
     <ClInclude Include="BinaryTree.h" />
     <ClInclude Include="DoublyLinkedList.h" />
+    <ClInclude Include="HashTable.h" />
     <ClInclude Include="Heap.h" />
     <ClInclude Include="LinkedList.h" />
     <ClInclude Include="BinarySearchTree.h" />
