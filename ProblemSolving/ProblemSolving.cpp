@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <stack> // STL
+#include "BinarySearch.h"
 using namespace std;
 
 
@@ -36,6 +37,38 @@ void reverseString(string& input) {
         i++;
         j--;
     }
+}
+
+// ------------- Problem : Search for a string inside a string strStr() -----------------
+// time complexity = O(m*n) - naive solution
+bool compare(string haystack, string needle, int startIndex, int endIndex) {
+    bool isEqual = true;
+    for (int i = startIndex; i <= endIndex; i++) {
+        if (haystack[i] != needle[i - startIndex]) {
+            isEqual = false;
+            break;
+        }
+    }
+    return isEqual;
+}
+
+int strStr(string haystack, string needle) {
+    int index = 0;
+    int haySize = haystack.size();
+    int needleSize = needle.size();
+    if (needleSize == 0) {
+        return 0;
+    }
+    int foundIndex = -1;
+    while ((index + needleSize - 1) < haySize) {
+        bool retVal = compare(haystack, needle, index, (index + needleSize - 1));
+        if (retVal) {
+            foundIndex = index;
+            break;
+        }
+        index = index + 1;
+    }
+    return foundIndex;
 }
 
 // -------------Problem : Check for balanced paranthesis -------------------
@@ -164,6 +197,7 @@ int evaluatePostfixExpression(string exp) {
     return stck.top();
 }
 
+
 int main()
 {
 #pragma region reversing a string
@@ -192,5 +226,15 @@ int main()
     //int evaluatedExp = evaluatePostfixExpression(result);
     //cout << "Result of Expression : " << evaluatedExp << endl;
 #pragma endregion
+
+#pragma region Searching string inside a string - T(n) = O(m*n)
+    //int retVal = strStr("hello", "ll");
+#pragma endregion
+
+#pragma region Search an element in a sorted list - return index if found or suggest the index to insert
+    //vector<int> v{  };
+    //searchInsert(v, 0);
+#pragma endregion
+
 
 }
