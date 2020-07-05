@@ -10,6 +10,7 @@
 #include "BinaryTree.h"
 #include "Heap.h"
 #include "HashTable.h"
+#include "Trie.h"
 
 using namespace std;
 
@@ -328,6 +329,27 @@ int main()
 //delete(dict1);
 #pragma endregion
 
+#pragma region Trie - Insert and Search for a word in dictionary in O(length of word)
+//Trie* wordDictionary = new Trie();
+//cout << "Configure words in dictionary : " << endl;
+//cout << "Enter 'X' to stop configuring : " << endl;
+//string word = "";
+//while (word != "X") {
+//	cin >> word;
+//	wordDictionary->insert(word);
+//}
+//
+//cout << "Enter Word to search : " << endl;
+//cout << "Enter 'X' to stop searching : " << endl;
+//string searchWord = "";
+//while (searchWord != "X") {
+//	cin >> searchWord;
+//	string outputMsg = wordDictionary->search(searchWord) == 1 ? "Valid Word" : "Invalid Word";
+//	cout << outputMsg << endl;
+//}
+//
+//delete(wordDictionary);
+#pragma endregion
 
 
 }
