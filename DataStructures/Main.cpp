@@ -329,12 +329,14 @@ int main()
 //delete(dict1);
 #pragma endregion
 
-#pragma region Trie - Insert and Search for a word in dictionary in O(length of word)
+#pragma region Trie - Insert, Search and Delete a word in dictionary in O(length of word)
 //Trie* wordDictionary = new Trie();
-//cout << "Configure words in dictionary : " << endl;
+//cout << "Enter number of words to configure in dictionary : " << endl;
+//int count = 0;
+//cin >> count;
 //cout << "Enter 'X' to stop configuring : " << endl;
 //string word = "";
-//while (word != "X") {
+//for (int i = 0; i < count; i++) {
 //	cin >> word;
 //	wordDictionary->insert(word);
 //}
@@ -347,6 +349,9 @@ int main()
 //	string outputMsg = wordDictionary->search(searchWord) == 1 ? "Valid Word" : "Invalid Word";
 //	cout << outputMsg << endl;
 //}
+//
+//wordDictionary->remove("RAB");
+//wordDictionary->remove("RAM");
 //
 //delete(wordDictionary);
 #pragma endregion
