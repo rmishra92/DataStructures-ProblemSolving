@@ -11,6 +11,7 @@
 #include "Heap.h"
 #include "HashTable.h"
 #include "Trie.h"
+#include "Graph.h"
 
 using namespace std;
 
@@ -356,5 +357,31 @@ int main()
 //delete(wordDictionary);
 #pragma endregion
 
+#pragma region Graph - Simple graph modelling a directed(A->B != B->A) social network....
+//Graph* network = new Graph();
+//network->addVertex('A');
+//network->addVertex('B');
+//network->addVertex('C');
+//network->addVertex('D');
+//
+//network->addEdge('A', 'B'); // these are directed edges....
+//network->addEdge('A', 'C');
+//network->addEdge('A', 'D');
+//network->addEdge('B', 'A');
+//network->addEdge('B', 'C');
+//network->addEdge('C', 'D');
+//network->addEdge('D', 'B');
+//
+//cout << "Connected Vertex of A : "; network->printConnectedVertexOf('A'); cout << endl;
+//cout << "Connected Vertex of B : "; network->printConnectedVertexOf('B'); cout << endl;
+//cout << "Connected Vertex of C : "; network->printConnectedVertexOf('C'); cout << endl;
+//cout << "Connected Vertex of D : "; network->printConnectedVertexOf('D'); cout << endl;
+//
+//cout << "Is Connected (A-D) : " << network->isConnected('A', 'D') << endl;
+//cout << "Is Connected (A-F) : " << network->isConnected('A', 'F') << endl;
+//cout << "Is Connected (Z-B) : " << network->isConnected('Z', 'B') << endl;
+//
+//delete(network);
+#pragma endregion
 
 }

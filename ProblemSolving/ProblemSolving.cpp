@@ -197,7 +197,6 @@ int evaluatePostfixExpression(string exp) {
     return stck.top();
 }
 
-
 int main()
 {
 #pragma region reversing a string
@@ -232,7 +231,7 @@ int main()
 #pragma endregion
 
 #pragma region Search an element in a sorted list - return index if found or suggest the index to insert
-    //vector<int> v{  };
+    //vector<int> v{ 1,3,4,5 };
     //searchInsert(v, 0);
 #pragma endregion
 
