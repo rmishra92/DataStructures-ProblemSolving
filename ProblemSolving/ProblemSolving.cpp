@@ -5,6 +5,7 @@
 #include <string>
 #include <stack> // STL
 #include "BinarySearch.h"
+#include "ClimbStairs.h"
 using namespace std;
 
 
@@ -235,5 +236,8 @@ int main()
     //searchInsert(v, 0);
 #pragma endregion
 
+#pragma region Number of ways to climb 'n' stairs - recursive, memoization, DP table
+    //int x = climbStairs(10);
+#pragma endregion
 
 }
