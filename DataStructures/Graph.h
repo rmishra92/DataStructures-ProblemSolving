@@ -9,6 +9,7 @@
 #include <string>
 #include <queue>
 #include <unordered_map>
+#include <stack>
 using namespace std;
 
 // name can be anything from A-Z, represents a person in the network....
@@ -46,6 +47,20 @@ private:
 		head = edgeNode; // change head to point to new edge node
 
 		edge_list[index] = head; // updating new head in the edge_list
+	}
+
+	void dfsRec(Vertex* root, unordered_map<char, Vertex*>* &map) {
+		map->emplace(root->name, root); // mark vertex as visited
+		cout << root->name << " ";
+
+		int vertexIndex = getIndex(root->name);
+		EdgeNode* PtrConnections = edge_list[vertexIndex]; // get connections for a vertex
+		while (PtrConnections != nullptr) {
+			if (map->find(PtrConnections->vertex->name) == map->end()) { // if vertex has not been visited
+				dfsRec(PtrConnections->vertex, map);
+			}
+			PtrConnections = PtrConnections->next;
+		}
 	}
 
 public:
@@ -116,10 +131,11 @@ public:
 		return isConnected;
 	}
 
-	// performs a breadth first traversal considering first node in the vertex_list as root node....
+	// performs a breadth first traversal, starts from first node in the vertex_list....
 	// T(n) = O(|v| + |e|); In worst case, when edges are much more than vertices(i.e, connected graph), |e| term will dominate and 
-	// complexity will be O(|e|) or, |e| ~ |v|^2 hence, O(|v| * |v|), S(n) = O(|v|) - stores all element in the graph
+	// complexity will be O(|e|) or, |e| ~ |v|^2 hence, O(|v| * |v|)
 	// for sparse graph with |v| >>> |e|, |v| will dominate and T(n) = O(|v|)....
+	// S(n) = O(| v | ) - stores all element in the graph
 	void breadthFirstTraversal() {
 		queue<Vertex*>* q = new queue<Vertex*>(); // queue to perform BFS
 		unordered_map<char, Vertex*>* ht = new unordered_map<char, Vertex*>(); // map to store visited vertices
@@ -140,5 +156,43 @@ public:
 				head = head->next;
 			}
 		}
+	}
+
+	// performs a depth first traversal, starts from first node in the vertex_list. In depth first, we go as deep as we can for a vertex and then backtrack if no path exists from a vertex.
+	// if graph = 0 -> 1, 0 -> 2, 1 -> 2, 2 -> 0, 2 -> 3, 3 -> 3, DFS from vertex 1 : 1 2 0 3
+	// Algorithm : Visit a node, go to it's connections and backtrack if no connection or all connections are visited already..Repeat from start..
+	// 2 ways : a) backtracking using recusrion b) backtracking using stack
+	// T(n) = O(|v| + |e|);
+	// S(n) = O(| v |) - stores all element in the graph
+	void depthFirstTraversal() {
+		Vertex* root = vertex_list[0]; // we start DFS from this node
+		unordered_map<char, Vertex*>* map = new unordered_map<char, Vertex*>();
+		// backtracking using recursion......
+		//dfsRec(root, map);
+
+		// backtracking using stack........
+		stack<Vertex*>* s = new stack<Vertex*>();
+		s->push(root);
+		map->emplace(root->name, root);
+		cout << root->name << " ";
+
+		while (!s->empty()) {
+			root = s->top();
+			EdgeNode* connectionsPtr = edge_list[getIndex(root->name)];
+			
+			while (connectionsPtr != nullptr && map->find(connectionsPtr->vertex->name) != map->end()) {
+				connectionsPtr = connectionsPtr->next;
+			}
+
+			if (connectionsPtr != nullptr) {
+				s->push(connectionsPtr->vertex);
+				map->emplace(connectionsPtr->vertex->name, connectionsPtr->vertex);
+				cout << connectionsPtr->vertex->name << " ";
+			}
+			else {
+				s->pop();
+			}
+		}
+
 	}
 };

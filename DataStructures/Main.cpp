@@ -389,6 +389,9 @@ int main()
 //cout << "Breadth First Traversal of network : ";
 //network->breadthFirstTraversal(); cout << endl;
 //
+//cout << "Depth First Traversal of network : ";
+//network->depthFirstTraversal(); cout << endl;
+//
 //delete(network);
 #pragma endregion
 
