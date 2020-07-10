@@ -7,6 +7,8 @@
 
 #include<iostream>
 #include <string>
+#include <queue>
+#include <unordered_map>
 using namespace std;
 
 // name can be anything from A-Z, represents a person in the network....
@@ -82,7 +84,7 @@ public:
 	void printConnectedVertexOf(char name) {
 		int index = getIndex(name);
 
-		if (vertex_list[index]->name == name) {
+		if (vertex_list[index] != nullptr && vertex_list[index]->name == name) {// first check to ensure vertex exists in the graph....
 			EdgeNode* ptrToHead = edge_list[index];
 			while (ptrToHead != nullptr) {
 				cout << ptrToHead->vertex->name << ",";
@@ -112,5 +114,31 @@ public:
 			}
 		}
 		return isConnected;
+	}
+
+	// performs a breadth first traversal considering first node in the vertex_list as root node....
+	// T(n) = O(|v| + |e|); In worst case, when edges are much more than vertices(i.e, connected graph), |e| term will dominate and 
+	// complexity will be O(|e|) or, |e| ~ |v|^2 hence, O(|v| * |v|), S(n) = O(|v|) - stores all element in the graph
+	// for sparse graph with |v| >>> |e|, |v| will dominate and T(n) = O(|v|)....
+	void breadthFirstTraversal() {
+		queue<Vertex*>* q = new queue<Vertex*>(); // queue to perform BFS
+		unordered_map<char, Vertex*>* ht = new unordered_map<char, Vertex*>(); // map to store visited vertices
+		q->push(vertex_list[0]); // insert first node in vertex
+		ht->emplace(vertex_list[0]->name, vertex_list[0]); // mark vertex_list[0] as visited by placing it in map....
+
+		while (!q->empty()) {
+			Vertex* vertex = q->front();
+			q->pop();
+			cout << vertex->name << " ";
+			int vertexIndex = getIndex(vertex->name); // at this index in edge_list, connected vertex(i.e, vertex at length 1) is present..
+			EdgeNode* head = edge_list[vertexIndex];
+			while (head != nullptr) {
+				if (ht->find(head->vertex->name) == ht->end()) { // vertex not visited so insert in map....
+					q->push(head->vertex);
+					ht->emplace(head->vertex->name, head->vertex);
+				}
+				head = head->next;
+			}
+		}
 	}
 };

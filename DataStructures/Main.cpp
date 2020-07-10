@@ -359,11 +359,14 @@ int main()
 
 #pragma region Graph - Simple graph modelling a directed(A->B != B->A) social network....
 //Graph* network = new Graph();
+//// addVertex() mimics people joining the network
 //network->addVertex('A');
 //network->addVertex('B');
 //network->addVertex('C');
 //network->addVertex('D');
+//network->addVertex('E');
 //
+//// addEdge() mimics follow request hence directed edges....
 //network->addEdge('A', 'B'); // these are directed edges....
 //network->addEdge('A', 'C');
 //network->addEdge('A', 'D');
@@ -371,6 +374,8 @@ int main()
 //network->addEdge('B', 'C');
 //network->addEdge('C', 'D');
 //network->addEdge('D', 'B');
+//network->addEdge('C', 'E');
+//network->addEdge('D', 'E');
 //
 //cout << "Connected Vertex of A : "; network->printConnectedVertexOf('A'); cout << endl;
 //cout << "Connected Vertex of B : "; network->printConnectedVertexOf('B'); cout << endl;
@@ -380,6 +385,9 @@ int main()
 //cout << "Is Connected (A-D) : " << network->isConnected('A', 'D') << endl;
 //cout << "Is Connected (A-F) : " << network->isConnected('A', 'F') << endl;
 //cout << "Is Connected (Z-B) : " << network->isConnected('Z', 'B') << endl;
+//
+//cout << "Breadth First Traversal of network : ";
+//network->breadthFirstTraversal(); cout << endl;
 //
 //delete(network);
 #pragma endregion
