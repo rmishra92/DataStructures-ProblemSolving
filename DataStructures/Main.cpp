@@ -367,15 +367,19 @@ int main()
 //network->addVertex('E');
 //
 //// addEdge() mimics follow request hence directed edges....
-//network->addEdge('A', 'B'); // these are directed edges....
-//network->addEdge('A', 'C');
-//network->addEdge('A', 'D');
-//network->addEdge('B', 'A');
-//network->addEdge('B', 'C');
-//network->addEdge('C', 'D');
-//network->addEdge('D', 'B');
-//network->addEdge('C', 'E');
-//network->addEdge('D', 'E');
+//// below graph represented a graph with negative edge weight(c->D) and,
+//// contains a negative weight cycle, A->C->D->A (can be detected using Bellman Ford's shortest path algorithm)...To detect that uncomment addEdge('C', 'D', -3) below..
+//network->addEdge('A', 'B', 1); // these are directed edges....
+//network->addEdge('A', 'C', 1);
+//network->addEdge('A', 'D', 1);
+//network->addEdge('B', 'A', 2);
+//network->addEdge('B', 'C', 2);
+//network->addEdge('C', 'D', -1);
+////network->addEdge('C', 'D', -3);
+//network->addEdge('D', 'B', 5);
+//network->addEdge('C', 'E', 4);
+//network->addEdge('D', 'E', 3);
+//network->addEdge('D', 'A', 1);
 //
 //cout << "Connected Vertex of A : "; network->printConnectedVertexOf('A'); cout << endl;
 //cout << "Connected Vertex of B : "; network->printConnectedVertexOf('B'); cout << endl;
@@ -391,6 +395,10 @@ int main()
 //
 //cout << "Depth First Traversal of network : ";
 //network->depthFirstTraversal(); cout << endl;
+//
+//cout << "Shortest path from (A-E) : ";
+//int dist = network->getShortestPath('A', 'E');
+//cout << "Total distance : " << dist << endl;
 //
 //delete(network);
 #pragma endregion

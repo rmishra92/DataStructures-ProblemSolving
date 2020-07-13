@@ -20,6 +20,7 @@ struct Vertex {
 struct EdgeNode {
 	Vertex* vertex; // pointer to a friend
 	EdgeNode* next; // pointer to next edge node
+	int weight;
 };
 
 class Graph {
@@ -63,6 +64,72 @@ private:
 		}
 	}
 
+	// for (u,v) edge, if distance[v] > distance[u] + weight[(u,v)] then update parent and distance maps....
+	bool relax(char edgeStart, EdgeNode* edgeEnd, unordered_map<char, int>& distanceMap, unordered_map<char, char>& parentMap) {
+		if (distanceMap[edgeEnd->vertex->name] > distanceMap[edgeStart] + edgeEnd->weight) {
+			distanceMap[edgeEnd->vertex->name] = distanceMap[edgeStart] + edgeEnd->weight;
+			parentMap[edgeEnd->vertex->name] = edgeStart;
+			return true; // true if this combination result in a better solution..
+		}
+		return false; // false if this combination is not optimal...
+	}
+
+	int getShortestPathByBellmanFord(char source, char destination) {
+		unordered_map<char, int> distanceMap; // stores minimum distance of each vertex from source vertex
+		unordered_map<char, char> parentMap; // stores parent for each vertex for minimum distance from source
+
+		distanceMap.emplace(source, 0); // set distance of source from source is zero
+		for (int i = 0; i < MaxSize; i++) { // update distance of each vertex from source to INT_MAX
+			Vertex* vertexPtr = vertex_list[i];
+			if (vertexPtr != nullptr && vertexPtr->name != source) {
+				distanceMap.emplace(vertexPtr->name, INT_MAX);
+			}
+		}
+
+		for (int i = 0; i < MaxSize; i++) { // set parent of each vertex as empty
+			Vertex* vertexPtr = vertex_list[i];
+			if (vertexPtr != nullptr) {
+				parentMap.emplace(vertexPtr->name, ' ');
+			}
+		}
+
+		for (int i = 0; i < (MaxSize - 1); i++) { // outer loop for (v-1) cycles
+			// visit all edges in each cycle
+			for (int j = 0; j < MaxSize; j++) { // loops through edge list, this for-loop visits all the edges in graph
+				EdgeNode* edgeNodePtr = edge_list[j];
+				while (edgeNodePtr != nullptr) { // loops through each connection of a vertex
+					relax(vertex_list[j]->name, edgeNodePtr, distanceMap, parentMap);
+					edgeNodePtr = edgeNodePtr->next;
+				}
+			}
+		}
+
+		// After (v-1) cycles, relaxation should have no impact..if it still relaxes then there is a negative weight cycle in graph....
+		// visit one more time through all edges to determine negative cycle in graph -- Bellman Ford alg strength..
+		for (int k = 0; k < MaxSize; k++) {
+			EdgeNode* edgePtr = edge_list[k];
+			while (edgePtr != nullptr) {
+				bool canFindOptimalSolution = relax(vertex_list[k]->name, edgePtr, distanceMap, parentMap);
+				if (canFindOptimalSolution) {
+					cout << "A negative weight cycle exists in the graph." << endl;
+					return 0;
+				}
+				edgePtr = edgePtr->next;
+			}
+		}
+
+		// print the shortest path from source-destination
+		char ptr = destination;
+		while (ptr != source) {
+			cout << ptr << "<-";
+			ptr = parentMap[ptr];
+		}
+		cout << ptr << endl; // loop will reach source at this point..
+
+		return distanceMap[destination]; // after (v-1) iteration, this will store the minimum distance to reach destination from source....
+
+	}
+
 public:
 	Graph() {
 		vertex_list = new Vertex * [MaxSize] {nullptr};
@@ -80,7 +147,7 @@ public:
 
 	// adds an edge between start and end vertex, i.e, start becoming friend of end. Entry of connection is not vice-versa, i.e, it is a directed graph....
 	// T(n) = O(1) because of insert at head of linked list
-	void addEdge(char start, char end) {
+	void addEdge(char start, char end, int weight = 0) {
 		int indexOfStart = getIndex(start); // gets index of start vertex in the vertex_list
 		int indexOfEnd = getIndex(end);
 		Vertex* vertexPtrEnd = vertex_list[indexOfEnd];
@@ -90,6 +157,7 @@ public:
 		EdgeNode* edgeNode = new EdgeNode();
 		edgeNode->vertex = vertexPtrEnd;
 		edgeNode->next = head;
+		edgeNode->weight = weight;
 		head = edgeNode; // change head to point to new edge node
 
 		edge_list[indexOfStart] = head; // updating new head in the edge_list
@@ -193,6 +261,13 @@ public:
 				s->pop();
 			}
 		}
+	}
 
+	// finds the shortest path from source to destination by different graph algorithms
+	// returns shortest path distance and prints the path....
+	// 1. Bellman-Ford : T(n) = O(|v| * |e|), visit all edges (|v| - 1) times and relax. Can detect negative cycle but costly compared to other algs.
+	int getShortestPath(char source, char destination) {
+		int result = getShortestPathByBellmanFord(source, destination);
+		return result;
 	}
 };
