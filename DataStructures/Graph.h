@@ -130,6 +130,67 @@ private:
 
 	}
 
+	char findMin(unordered_map<char,int> &list) { // a priority queue can be used here to reduce finding minimum to O(logn) from O(n)
+		int min = INT_MAX;
+		char minkey = ' ';
+		for (pair<char, int> i : list) {
+			if (i.second < min)
+			{
+				min = i.second;
+				minkey = i.first;
+			}
+		}
+		return minkey;
+	}
+
+	// Idealy, T(n) = O((|e|+|v|)log(|v|)) when a heap+map DS gives a O(1) access to vertex and log|v| for extract min but currently it is |v| for extract min because of implementation....
+	//S(n) = O(|v|) for storing all vertex in distance map or parent map
+	//Djikstra is a greedy algorithm - picks minimum distance vertex from 'heapMap'(see below) and relaxes it's neighbours and continues this process...
+	int getShortestPathByDijkstra(char source, char destination) {
+		unordered_map<char, int> distanceMap; // stores minimum distance of each vertex from source vertex
+		unordered_map<char, char> parentMap; // stores parent for each vertex for minimum distance from source
+
+		unordered_map<char, int> heapMap; // DS to mimick a (heap + map) DS that provides O(1) access and O(logn) extract minimum element..
+		heapMap.emplace(source, 0); // set distance of source from source is zero
+		for (int i = 0; i < MaxSize; i++) { // update distance of each vertex from source to INT_MAX
+			Vertex* vertexPtr = vertex_list[i];
+			if (vertexPtr != nullptr && vertexPtr->name != source) {
+				heapMap.emplace(vertexPtr->name, INT_MAX);
+			}
+		}
+
+		for (int i = 0; i < MaxSize; i++) { // set parent of each vertex as empty
+			Vertex* vertexPtr = vertex_list[i];
+			if (vertexPtr != nullptr) {
+				parentMap.emplace(vertexPtr->name, ' ');
+			}
+		}
+
+		while (!heapMap.empty()) {
+			char minKey = findMin(heapMap); // ideally O(log|v|) when priority queue/heap is in place but now O(|V|) because it is linear search..
+			EdgeNode* connection = edge_list[getIndex(minKey)];
+			while (connection != nullptr) {
+				if (heapMap.find(connection->vertex->name) != heapMap.end() && heapMap[connection->vertex->name] > heapMap[minKey] + connection->weight) {
+					heapMap[connection->vertex->name] = heapMap[minKey] + connection->weight;
+					parentMap[connection->vertex->name] = minKey;
+				}
+				connection = connection->next;
+			}
+			distanceMap.emplace(minKey, heapMap[minKey]);
+			heapMap.erase(minKey);
+		}
+
+		// print the shortest path from source-destination
+		char ptr = destination;
+		while (ptr != source) {
+			cout << ptr << "<-";
+			ptr = parentMap[ptr];
+		}
+		cout << ptr << endl; // loop will reach source at this point..
+
+		return distanceMap[destination]; 
+	}
+
 public:
 	Graph() {
 		vertex_list = new Vertex * [MaxSize] {nullptr};
@@ -263,11 +324,14 @@ public:
 		}
 	}
 
-	// finds the shortest path from source to destination by different graph algorithms
+	// Single Source Shortest Path problem : finds the shortest path from a source to all vertices by different graph algorithms
 	// returns shortest path distance and prints the path....
 	// 1. Bellman-Ford : T(n) = O(|v| * |e|), visit all edges (|v| - 1) times and relax. Can detect negative cycle but costly compared to other algs.
+	// 2. Djikstra : T(n) = O((|e|+|v|) * log(|v|)), doesn't work if graph has negative weight edges but better for non-negative edges containing graph....
 	int getShortestPath(char source, char destination) {
-		int result = getShortestPathByBellmanFord(source, destination);
+		//int result = getShortestPathByBellmanFord(source, destination);
+
+		int result = getShortestPathByDijkstra(source, destination);
 		return result;
 	}
 };

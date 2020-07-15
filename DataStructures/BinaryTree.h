@@ -108,6 +108,50 @@ private:
 		}
 	}
 
+	// whether an element is present in a binary tree, T(n) = O(n)
+	bool isPresent(BstNode* root, int a) {
+		if (root == nullptr) { return false; }
+		if (root->data == a) { return true; }
+		return isPresent(root->left, a) || isPresent(root->right, a);
+	}
+
+#pragma region Lowest Commn Ancestor in binary tree - not in BST
+	bool isBothInTree(int p, int q, BstNode* root) {
+		return isPresent(root, p) && isPresent(root, q);
+	}
+
+	// T(n) = O(nlog(n))
+	BstNode* findLCA(BstNode* root, int p, int q) {
+		if (root->data == p || root->data == q) {
+			return root;
+		}
+
+		if (isBothInTree(p, q, root->left)) {
+			return findLCA(root->left, p, q);
+		}
+		else if (isBothInTree(p, q, root->right)) {
+			return findLCA(root->right, p, q);
+		}
+		return root;
+	}
+
+	// T(n) = O(n)
+	BstNode* findLCAFast(BstNode* root, int p, int q) {
+		if (root == nullptr) { return nullptr; }
+		if (root->data == p || root->data == q) {
+			return root;
+		}
+		BstNode* left = findLCAFast(root->left, p, q);
+		BstNode* right = findLCAFast(root->right, p, q);
+		if (left != nullptr && right != nullptr) { return root; }
+		else if (left == nullptr && right == nullptr) { return nullptr; }
+		else {
+			return left != nullptr ? left : right;
+		}
+	}
+#pragma endregion
+
+
 public:
 	int findHeight() {
 		return findHeightRecursiveFunc(root);
@@ -221,5 +265,12 @@ public:
 		// time complexity = O(n), space complexity = O(1)...no need to store traversal in an array..
 		return traverseInOrderAndCompare(root, INT_MIN, INT_MAX);
 #pragma endregion
+	}
+
+	// Finding lowest common ancestor of two nodes in a binary tree..
+	// Note : this solution is not for LCA in case of BST.
+	BstNode* lowestCommonAncestor(int p, int q) {
+		return findLCA(root, p, q); // T)n) = O(nlog(n))
+		//return findLCAFast(root, p, q); // T(n) = O(n)
 	}
 };

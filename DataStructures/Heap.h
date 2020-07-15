@@ -2,12 +2,12 @@
 #include <iostream>
 using namespace std;
 
-// Heap exists either as Min/Max heap. In Min heap, root is larger than the children and this property is true for all nodes in the tree..
+// Heap exists either as Min/Max heap. In Min heap, root is smaller than the childrens(left,right) and this property is true for all nodes in the tree..
 // operation : Peek(gives the first element in the heap - max element in max heap/ min element in min heap),
 //             Pop(deletes the first element from the heap(max/min whether it is max/min heap),
 //             Add(inserts and element in to heap).
 // Note : Heap is filled top->bottom and then left->right so array implementation is easier.
-// left child = 2 * index + 1, right child = 2 * index + 1, parent = (index - 2) / 2
+// left child = 2 * index + 1, right child = 2 * index + 1, parent = (index - 1) / 2
 
 // Note :- for storing "k-best" element in a list, min-heap can be useful. Insert the new element and then pop. Pop will pop the worst element in the list
 // leaving the k-best element at this stage....

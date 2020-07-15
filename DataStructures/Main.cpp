@@ -219,7 +219,7 @@ int main()
 //delete(bst);
 #pragma endregion
 
-#pragma region Binary Tree - Find height, Traversal(Level Order, Pre-Order, In-Order, Post-Order), IsBST
+#pragma region Binary Tree - Find height, Traversal(Level Order, Pre-Order, In-Order, Post-Order), IsBST, Lowest Common Ancestor
 
 //BinaryTree* bt = new BinaryTree();
 //bt->insert(15);bt->insert(10);bt->insert(8);bt->insert(12);bt->insert(20);bt->insert(4);bt->insert(50);bt->insert(2);bt->insert(1);
@@ -245,6 +245,9 @@ int main()
 //cout << "Is BST : " << bt->isBinarySearchTree() << endl;
 //
 //cout << "Is BST(by method 2) : " << bt->isBinarySearchTree2() << endl;
+//
+
+//cout << "Lowest Common Ancestor of (4,12) : " << bt->lowestCommonAncestor(4, 12)->data << endl;
 //
 //delete(bt);
 
@@ -359,23 +362,26 @@ int main()
 
 #pragma region Graph - Simple graph modelling a directed(A->B != B->A) social network....
 //Graph* network = new Graph();
-//// addVertex() mimics people joining the network
+// addVertex() mimics people joining the network
 //network->addVertex('A');
 //network->addVertex('B');
 //network->addVertex('C');
 //network->addVertex('D');
 //network->addVertex('E');
-//
-//// addEdge() mimics follow request hence directed edges....
-//// below graph represented a graph with negative edge weight(c->D) and,
-//// contains a negative weight cycle, A->C->D->A (can be detected using Bellman Ford's shortest path algorithm)...To detect that uncomment addEdge('C', 'D', -3) below..
+
+// addEdge() mimics follow request hence directed edges....
+// below graph represented a graph with negative edge weight(c->D) and,
+// contains a negative weight cycle, A->C->D->A (can be detected using Bellman Ford's shortest path algorithm)...To detect that uncomment addEdge('C', 'D', -3) below..
 //network->addEdge('A', 'B', 1); // these are directed edges....
 //network->addEdge('A', 'C', 1);
 //network->addEdge('A', 'D', 1);
 //network->addEdge('B', 'A', 2);
 //network->addEdge('B', 'C', 2);
+// for Djikstra no negative edges in graph 
+//network->addEdge('C', 'D', 5);
+// below two entry for Bellman Ford
 //network->addEdge('C', 'D', -1);
-////network->addEdge('C', 'D', -3);
+//network->addEdge('C', 'D', -3);
 //network->addEdge('D', 'B', 5);
 //network->addEdge('C', 'E', 4);
 //network->addEdge('D', 'E', 3);
@@ -399,7 +405,7 @@ int main()
 //cout << "Shortest path from (A-E) : ";
 //int dist = network->getShortestPath('A', 'E');
 //cout << "Total distance : " << dist << endl;
-//
+
 //delete(network);
 #pragma endregion
 
