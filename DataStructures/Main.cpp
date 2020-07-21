@@ -12,6 +12,7 @@
 #include "HashTable.h"
 #include "Trie.h"
 #include "Graph.h"
+#include "HeapMap.h"
 
 using namespace std;
 
@@ -407,6 +408,28 @@ int main()
 //cout << "Total distance : " << dist << endl;
 
 //delete(network);
+#pragma endregion
+
+#pragma region HeapMap - A combination of Heap and Map datastructure giving find in O(1) and extractMin in O(logn) time
+//HeapMap* hm = new HeapMap();
+//hm->insert(3, 'C');
+//hm->insert(2, 'B');
+//hm->insert(5, 'E');
+//hm->insert(1, 'A');
+//cout << "Find in HeapMap in O(1), Code(5) :";
+//HeapNode* node = hm->find(5);
+//if (node == nullptr) {
+//	cout << "data not present in the HeapMap." << endl;
+//}
+//else {
+//	cout << node->code << endl;
+//}
+//
+//cout << "Extract Minimum in HeapMap in O(logn), Code(Min) :" << hm->extractMinimum()->code << endl;
+//cout << "Extract Minimum in HeapMap in O(logn), Code(Min) :" << hm->extractMinimum()->code << endl;
+//cout << "Extract Minimum in HeapMap in O(logn), Code(Min) :" << hm->extractMinimum()->code << endl;
+//
+//delete(hm);
 #pragma endregion
 
 }
