@@ -13,6 +13,7 @@
 #include "Trie.h"
 #include "Graph.h"
 #include "HeapMap.h"
+#include "AVLTree.h"
 
 using namespace std;
 
@@ -431,5 +432,24 @@ int main()
 //
 //delete(hm);
 #pragma endregion
+
+#pragma region AVL Tree : self-balancinf BST - insert and delete operation
+//AVLTree* avlTree = new AVLTree();
+//avlTree->insert(1);
+//avlTree->insert(3);
+//avlTree->insert(2); // right-left rotate at this point for balancing
+//avlTree->insert(4);
+//avlTree->insert(5); // left rotate at this point for balancing
+//
+//cout << "In-Order traversal AVL Tree(same as BST, i.e, sorted non-decreasing order : ";
+//avlTree->printInOrder(); cout << endl;
+//
+//avlTree->deleteNode(1); // this delete will make the tree imbalanced leading to balancing with rotation.
+//cout << "In-Order traversal AVL Tree(after delete(1)) : ";
+//avlTree->printInOrder(); cout << endl;
+//
+//delete(avlTree);
+#pragma endregion
+
 
 }
