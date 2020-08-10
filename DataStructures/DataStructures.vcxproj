@@ -149,6 +149,7 @@
     <ClInclude Include="HashTable.h" />
     <ClInclude Include="Heap.h" />
     <ClInclude Include="HeapMap.h" />
+    <ClInclude Include="LinkedHashMap.h" />
     <ClInclude Include="LinkedList.h" />
     <ClInclude Include="BinarySearchTree.h" />
     <ClInclude Include="Queue.h" />

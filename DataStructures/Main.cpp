@@ -14,6 +14,7 @@
 #include "Graph.h"
 #include "HeapMap.h"
 #include "AVLTree.h"
+#include "LinkedHashMap.h"
 
 using namespace std;
 
@@ -451,5 +452,15 @@ int main()
 //delete(avlTree);
 #pragma endregion
 
+#pragma region LRU cache implemented with a linked map structure
+//LRUCache* lruCache = new LRUCache(2); // cache size is 2
+//lruCache->set(1, 1);
+//lruCache->set(2, 2); // most recent = 2, least recent = 1(so 1 will be purged out on an entry now)
+//lruCache->set(3, 3);
+//lruCache->get(2); // before get (3,3) was recent but after get (2,2) will be most recent element. So, another insert will purge (3,3) out.
+//lruCache->set(4, 4);
+//
+//delete lruCache;
+#pragma endregion
 
 }
