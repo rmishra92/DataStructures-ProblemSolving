@@ -452,7 +452,7 @@ int main()
 //delete(avlTree);
 #pragma endregion
 
-#pragma region LRU cache implemented with a linked map structure
+#pragma region LRU cache implemented with STL and also doubly linked list with Map
 //LRUCache* lruCache = new LRUCache(2); // cache size is 2
 //lruCache->set(1, 1);
 //lruCache->set(2, 2); // most recent = 2, least recent = 1(so 1 will be purged out on an entry now)
@@ -461,6 +461,15 @@ int main()
 //lruCache->set(4, 4);
 //
 //delete lruCache;
+
+//LRUCache2* lruCache2 = new LRUCache2(2);
+//lruCache2->set(1);
+//lruCache2->set(2);
+//lruCache2->set(3);
+//lruCache2->get(2);
+//lruCache2->set(4); // '3' is purged out at this point....
+//
+//delete lruCache2;
 #pragma endregion
 
 }
