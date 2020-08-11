@@ -15,6 +15,7 @@
 #include "HeapMap.h"
 #include "AVLTree.h"
 #include "LinkedHashMap.h"
+#include "LFUCache.h"
 
 using namespace std;
 
@@ -471,5 +472,15 @@ int main()
 //
 //delete lruCache2;
 #pragma endregion
+
+LFUCache* lfuCache = new LFUCache(1);
+lfuCache->put(2, 1);
+lfuCache->get(2);
+lfuCache->put(3, 2);
+lfuCache->get(2);
+lfuCache->get(3);
+
+
+delete(lfuCache);
 
 }

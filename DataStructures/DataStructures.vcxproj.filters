@@ -59,5 +59,8 @@
     <ClInclude Include="LinkedHashMap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="LFUCache.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
