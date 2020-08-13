@@ -473,14 +473,31 @@ int main()
 //delete lruCache2;
 #pragma endregion
 
-LFUCache* lfuCache = new LFUCache(1);
-lfuCache->put(2, 1);
-lfuCache->get(2);
-lfuCache->put(3, 2);
-lfuCache->get(2);
-lfuCache->get(3);
+#pragma region LFU cache implementation - 2 solutions (O(n)- not so optimal and O(1)- optimal)
+//LFUCache* lfuCache = new LFUCache(1);
+//lfuCache->put(2, 1);
+//lfuCache->get(2);
+//lfuCache->put(3, 2);
+//lfuCache->get(2);
+//lfuCache->get(3);
+//
+//
+//delete(lfuCache);
 
-
-delete(lfuCache);
+//LFUCacheEfficient* lfuCacheEfficient = new LFUCacheEfficient(3);
+//lfuCacheEfficient->set(1, 10);
+//lfuCacheEfficient->set(2, 20);
+//lfuCacheEfficient->set(3, 30);
+//lfuCacheEfficient->set(4, 40); // evict (1,1)
+//
+//lfuCacheEfficient->get(2);
+//lfuCacheEfficient->get(3);
+//lfuCacheEfficient->get(4); // minFreq = 2 coz no element at freq 1 now....
+//lfuCacheEfficient->set(5,50); // evict (2,2)
+//lfuCacheEfficient->set(6, 60); // evict (3,3)
+//lfuCacheEfficient->set(7, 70); // evict(4,4) and minFreq = 1
+//
+//delete lfuCacheEfficient;  
+#pragma endregion
 
 }
